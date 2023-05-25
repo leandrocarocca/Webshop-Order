@@ -2,10 +2,12 @@ package com.example.accessingdatamysql;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class OrdersController {
@@ -24,11 +26,11 @@ public class OrdersController {
         return repo.findAll();
     }
 
-    /*@RequestMapping("/orders/{customerId}")
+    @RequestMapping("/orders/{customerId}")
     public List<Orders> getOrdersByCustomerId(@PathVariable Long customerId){
         List<Orders> listOfOrders = repo.findAll();
         return listOfOrders.stream()
-                .filter(orders -> Objects.equals(orders.getCustomer().getId(), customerId))
+                .filter(orders -> Objects.equals(orders.getCustomerId(),customerId))
                 .toList();
-    }*/
+    }
 }

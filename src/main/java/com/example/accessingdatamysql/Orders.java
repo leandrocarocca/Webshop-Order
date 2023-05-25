@@ -16,21 +16,16 @@ public class Orders {
     @Id
     @GeneratedValue
     private Long id;
-
     private LocalDateTime date;
+    private long customerId;
+    @ElementCollection
+    @CollectionTable(name="orders_products", joinColumns = @JoinColumn(name="order_id"))
+    @Column(name="product_id")
+    private List<Long> product;
 
-    /*@ManyToOne
-    @JoinColumn
-    private Customer customer;
-    @ManyToMany
-    @JoinTable(
-            name = "orders_products",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;*/
-
-    public Orders(LocalDateTime date) {
+    public Orders(LocalDateTime date, List<Long>product, long customerId) {
         this.date = date;
+        this.product = product;
+        this.customerId = customerId;
     }
 }
