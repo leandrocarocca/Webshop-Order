@@ -11,6 +11,10 @@ public class ProductDTO {
         this.price = price;
     }
 
+    public ProductDTO(){
+
+    }
+
     public Long getId() {
         return id;
     }

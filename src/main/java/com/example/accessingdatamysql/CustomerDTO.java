@@ -10,6 +10,9 @@ public class CustomerDTO {
         this.name = name;
         this.ssn = ssn;
     }
+    public CustomerDTO(){
+
+    }
 
     public Long getId() {
         return id;
