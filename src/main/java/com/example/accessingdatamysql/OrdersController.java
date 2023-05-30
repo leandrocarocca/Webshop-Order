@@ -14,8 +14,9 @@ import java.util.Objects;
 public class OrdersController {
     private final OrdersRepo repo;
     private final RestTemplate restTemplate;
-    private static final String CUSTOMER_API_BASE_URL = "http://localhost:8081";
-    private static final String PRODUCT_API_BASE_URL = "http://localhost:8082";
+    private final String CUSTOMER_API_BASE_URL = "http://customer-service:8081";
+    private final String PRODUCT_API_BASE_URL = "http://product-service:8082";
+
 
     private static final Logger log = LoggerFactory.getLogger(OrdersController.class);
 
@@ -34,10 +35,12 @@ public class OrdersController {
 
         // API call to Customer API to fetch customers
         String customerApiUrl = CUSTOMER_API_BASE_URL + "/customers";
+        System.out.println(customerApiUrl);
         CustomerDTO[] customers = restTemplate.getForObject(customerApiUrl, CustomerDTO[].class);
 
         // API call to Product API to fetch products
         String productApiUrl = PRODUCT_API_BASE_URL + "/items";
+        System.out.println(productApiUrl);
         ProductDTO[] products = restTemplate.getForObject(productApiUrl, ProductDTO[].class);
 
         return listOfOrders;
