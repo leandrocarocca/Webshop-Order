@@ -18,6 +18,8 @@ public class OrdersController {
     private final String PRODUCT_API_BASE_URL = "http://product-service:8082";
 
 
+
+
     private static final Logger log = LoggerFactory.getLogger(OrdersController.class);
 
     @Autowired
@@ -61,6 +63,19 @@ public class OrdersController {
         return listOfOrders.stream()
                 .filter(orders -> Objects.equals(orders.getCustomerId(), customerId))
                 .toList();
+    }
+
+    @RequestMapping("/orders/{orderId}")
+    public String getCustomerByOrderId(@PathVariable Long orderId){
+        String customerApiUrl = CUSTOMER_API_BASE_URL + "/customers?orderId=" + orderId;
+        CustomerDTO[] customers = restTemplate.getForObject(customerApiUrl, CustomerDTO[].class);
+
+        if (customers != null && customers.length > 0) {
+            String customerName = customers[0].getName();
+            return "Customer name for order ID " + orderId + ": " + customerName;
+        } else {
+            return "No customer found for order ID " + orderId;
+        }
     }
 }
 
