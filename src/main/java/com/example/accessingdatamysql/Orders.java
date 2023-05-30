@@ -28,4 +28,36 @@ public class Orders {
         this.product = product;
         this.customerId = customerId;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
+    public List<Long> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Long> product) {
+        this.product = product;
+    }
 }

@@ -17,6 +17,8 @@ public class OrdersController {
     private final String CUSTOMER_API_BASE_URL = "http://customer-service:8081";
     private final String PRODUCT_API_BASE_URL = "http://product-service:8082";
 
+    private CustomerDTO customerDTO;
+
 
 
 
@@ -65,13 +67,13 @@ public class OrdersController {
                 .toList();
     }
 
-    @RequestMapping("/orders/{orderId}")
+    @RequestMapping("/customerbyid/{orderId}")
     public String getCustomerByOrderId(@PathVariable Long orderId){
-        String customerApiUrl = CUSTOMER_API_BASE_URL + "/customers?orderId=" + orderId;
-        CustomerDTO[] customers = restTemplate.getForObject(customerApiUrl, CustomerDTO[].class);
+        String customerApiUrl = CUSTOMER_API_BASE_URL + "/customers/" + orderId;
+        CustomerDTO customers = restTemplate.getForObject(customerApiUrl, CustomerDTO.class);
 
-        if (customers != null && customers.length > 0) {
-            String customerName = customers[0].getName();
+        if (customers != null) {
+            String customerName = customers.getName();
             return "Customer name for order ID " + orderId + ": " + customerName;
         } else {
             return "No customer found for order ID " + orderId;
